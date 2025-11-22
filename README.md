@@ -53,7 +53,7 @@ This section gives a concise but clear breakdown of all the files needed for Pos
 
 ### <ins>2. SPEF File (Extracted Parasitics).</ins>
 - File name: `vsdbabysoc.spef`
-- Generated in: Week 7 – Parasitic Extraction (OpenROAD’s ARC or OpenRCX). [Check here]()
+- Generated in: Week 7 – Parasitic Extraction. [Check here](https://github.com/BitopanBaishya/RISC-V-SoC-Tapeout-Program-2025---Week-7.git)
 - Purpose: This file contains all extracted parasitics from the routed layout — wire resistance, net capacitances, coupling values, pin capacitances. Annotating this into OpenSTA enables real, RC-aware timing analysis instead of ideal wires.
 - Path: `/home/bitopan/VSD_Tapeout_Program/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc.spef`
 
