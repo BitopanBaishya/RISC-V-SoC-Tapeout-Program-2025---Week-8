@@ -78,7 +78,7 @@ This section gives a concise but clear breakdown of all the files needed for Pos
 
 ### <ins>4. Timing Constraints (SDC File).</ins>
 - File name: `4_cts.sdc`
-- Generated in: Week 7 – During Clock Tree Synthesis. [Check here]()
+- Generated in: Week 7 – During Clock Tree Synthesis. [Check here](https://github.com/BitopanBaishya/RISC-V-SoC-Tapeout-Program-2025---Week-7.git)
 - Purpose: Defines the design’s timing intent: clock definitions, I/O delays, false paths, multicycle paths, and all other STA constraints. This same SDC must be used consistently across synthesis, post-route STA, and multi-corner analysis.
 - Path: `/home/bitopan/VSD_Tapeout_Program/OpenROAD-flow-scripts/flow/results/sky130hd/vsdbabysoc/base/4_cts.sdc`
 
