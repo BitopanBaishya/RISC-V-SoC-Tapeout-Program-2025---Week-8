@@ -235,49 +235,38 @@ import os
 # BASE INPUT AND OUTPUT PATHS
 # ============================
 BASE = "/home/bitopan/VSD_Tapeout_Program/VSDBabySoC/OpenSTA/examples/BabySoC/STA_OUTPUT/route"
-OUTPUT_DIR = BASE  # outputs saved here
+OUTPUT_DIR = BASE
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-
-# -----------------------------------------------------
-# Helper: extract the last floating-point number in a line
-# -----------------------------------------------------
 def extract_number(line):
     nums = re.findall(r"[-+]?\d*\.\d+|\d+", line)
     if nums:
         return float(nums[-1])
     return None
 
-
-# -----------------------------------------------------
 # Load corner names
-# -----------------------------------------------------
 with open(f"{BASE}/sta_worst_max_slack.txt") as f:
     corners = [line.strip() for line in f if line.strip().startswith("sky130")]
 
-# Prepare arrays
 worst_setup_slack = []
 worst_hold_slack = []
 wns_list = []
 tns_list = []
 
-
-# -----------------------------------------------------
-# Worst Setup Slack (WNS)
-# -----------------------------------------------------
+# Worst Setup Slack + correct WNS
 with open(f"{BASE}/sta_worst_max_slack.txt") as f:
     for line in f:
         if line.startswith("sky130"):
             num_line = f.readline()
             value = extract_number(num_line)
             worst_setup_slack.append(value)
-            wns_list.append(value)  # WNS = same as worst setup slack
 
+            # ------ CORRECT WNS FORMULA ------
+            wns = value if value < 0 else 0.0
+            wns_list.append(wns)
 
-# -----------------------------------------------------
-# Worst Hold Slack (WHS)
-# -----------------------------------------------------
+# Worst Hold Slack
 with open(f"{BASE}/sta_worst_min_slack.txt") as f:
     for line in f:
         if line.startswith("sky130"):
@@ -285,10 +274,7 @@ with open(f"{BASE}/sta_worst_min_slack.txt") as f:
             value = extract_number(num_line)
             worst_hold_slack.append(value)
 
-
-# -----------------------------------------------------
-# TNS extraction
-# -----------------------------------------------------
+# TNS
 with open(f"{BASE}/sta_tns.txt") as f:
     for line in f:
         if line.startswith("sky130"):
@@ -296,10 +282,7 @@ with open(f"{BASE}/sta_tns.txt") as f:
             value = extract_number(num_line)
             tns_list.append(value)
 
-
-# -----------------------------------------------------
-# Create DataFrame with all four fields
-# -----------------------------------------------------
+# Create table
 df = pd.DataFrame({
     "Corner": corners,
     "Worst Setup Slack": worst_setup_slack,
@@ -308,7 +291,6 @@ df = pd.DataFrame({
     "TNS": tns_list
 })
 
-# Save CSV & Markdown
 df.to_csv(f"{OUTPUT_DIR}/sta_summary.csv", index=False)
 df.to_markdown(f"{OUTPUT_DIR}/sta_summary.md", index=False)
 
