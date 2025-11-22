@@ -12,6 +12,7 @@ The focus of this week is to validate the timing behavior of the VSDBabySoC desi
 [4. Comparison With Post-Synthesis STA Reports (Week 3)](#4-comparison-with-post-synthesis-sta-reports-week-3)<br>
 [5. Interpretation and Discussion](#5-interpretation-and-discussion)<br>
 [6. Conclusions](#6-conclusions)<br>
+[🏁 Final Remarks](#-final-remarks)
 
 ---
 
